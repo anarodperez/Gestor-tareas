@@ -1,0 +1,38 @@
+/* Asegúrate de incluir estos estilos después de los estilos del footer para que se sobreescriban correctamente. */
+
+/* Estilos para el texto y los enlaces de la navbar */
+.navbar-brand, .nav-link {
+  color: #fff !important; /* Establece el color de texto */
+  transition: color 0.3s ease; /* Transición suave para los enlaces */
+}
+
+/* Efecto hover para los enlaces de la navbar */
+.nav-link:hover {
+  color: #cce1ff !important; /* Color ligeramente más claro al pasar el ratón por encima */
+}
+
+/* Estilos para el botón de la versión móvil */
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5); /* Color del borde del botón */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='%23FFFFFF' viewBox='0 0 30 30'><path d='M0,5 30,5' /><path d='M0,14 30,14' /><path d='M0,23 30,23'/></svg>"); /* Icono personalizado para el botón */
+}
+
+/* Personalizar el fondo del menú de la navbar en versión móvil */
+.navbar-collapse {
+  background-color: #0056b3; /* Fondo más oscuro para el menú desplegable en móvil */
+}
+
+/* Estilos para el botón de inicio de sesión */
+.btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.5); /* Color del borde del botón */
+  color: #fff; /* Color del texto del botón */
+  transition: all 0.3s ease; /* Transición suave para los cambios de estilo */
+}
+
+.btn-outline-light:hover {
+  background-color: #fff; /* Fondo blanco al pasar el ratón por encima */
+  color: #0056b3; /* Color del texto cuando se hace hover */
+}

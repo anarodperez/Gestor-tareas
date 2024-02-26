@@ -1,0 +1,22 @@
+/* Gradiente de fondo para el footer */
+.bg-primary {
+  background: linear-gradient(45deg, #007bff, #004085);
+}
+
+/* Estilos para los enlaces del footer */
+.footer-link {
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+/* Botones de redes sociales con efecto hover */
+.btn-floating:hover {
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+  background-color: #0056b3; /* Cambia el color de fondo */
+}
+
+/* Personalización de la sección adicional del footer */
+.bg-secondary {
+  background-color: #6c757d !important; /* Sombra más oscura para el texto 'Hecho con ímpetu y café' */
+  font-style: italic; /* Estilo de fuente */
+}

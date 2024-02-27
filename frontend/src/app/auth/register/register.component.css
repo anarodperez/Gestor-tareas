@@ -16,6 +16,7 @@
   border: none;
   border-radius: 25px;
   padding: 25px;
+  background-color: #e9ecef;
 }
 
 .form-control:focus {

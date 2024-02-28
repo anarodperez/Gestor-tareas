@@ -1,11 +1,11 @@
 <div class="login-container d-flex align-items-center justify-content-center">
-  <form class="login-form text-center">
+  <form class="login-form text-center" (ngSubmit)="login()" method="POST">
     <h1 class="mb-5 font-weight-light text-uppercase">Iniciar Sesión</h1>
     <div class="form-group mb-2">
-      <input type="email" class="form-control rounded-pill form-control-lg" placeholder="Correo electrónico" required>
+      <input type="email"  [(ngModel)]="email" name="email" class="form-control rounded-pill form-control-lg" placeholder="Correo electrónico" required>
     </div>
     <div class="form-group">
-      <input type="password" class="form-control rounded-pill form-control-lg" placeholder="Contraseña" required>
+      <input type="password" [(ngModel)]="password" name="password" class="form-control rounded-pill form-control-lg" placeholder="Contraseña" required>
     </div>
     <div class="forgot-link form-group d-flex justify-content-between align-items-center">
       <div class="form-check">

@@ -17,15 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/test', function () {
-//     return response()->json(['message' => 'Backend de Laravel funcionando']);
-// });
-
 Route::get('/{any}', function () {
     return view('app');
 })->where('any', '.*');
-
-
-// Rutas de autenticación
-Route::post('register', 'AuthController@register');
-Route::post('login', 'AuthController@login');

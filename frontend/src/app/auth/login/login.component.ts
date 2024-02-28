@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service'; // Asegúrate de que la ruta sea correcta
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   login() {
     console.log("Intentando iniciar sesión");
@@ -22,16 +23,27 @@ export class LoginComponent {
       email: this.email,
       password: this.password
     };
-    console.log(loginData);
     this.authService.login(loginData).subscribe({
       next: (response: any) => {
         console.log('Inicio de sesión exitoso', response);
-        // Aquí podrías redirigir al usuario o guardar el token en el almacenamiento local
+        // Guardar el token en el almacenamiento local si es necesario
+        // localStorage.setItem('authToken', response.authToken);
+
+        // Redirigir al dashboard
+        this.router.navigate(['/dashboard']); // Usa el método 'navigate' para redirigir
       },
       error: (error: any) => {
         console.error('Error en el inicio de sesión', error);
-        // Aquí puedes manejar errores, como mostrar un mensaje al usuario
       }
     });
   }
+
+  logout() {
+    // Eliminar el token del almacenamiento local
+    localStorage.removeItem('authToken');
+
+    // Redirigir al login o a la página de inicio
+    this.router.navigate(['/login']);
+  }
+
 }

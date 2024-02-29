@@ -4,5 +4,6 @@ import { LoginComponent } from "./login/login.component";
 
 export const AUTH_ROUTES: Routes =  [
   {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'logout', component: LoginComponent}
 ]

@@ -23,6 +23,8 @@ export class LoginComponent {
       email: this.email,
       password: this.password
     };
+
+    console.log(loginData);
     this.authService.login(loginData).subscribe({
       next: (response: any) => {
         console.log('Inicio de sesión exitoso', response);

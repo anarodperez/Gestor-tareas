@@ -6,7 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(),
+  providers: [
+    provideRouter(routes), provideClientHydration(),
     importProvidersFrom(HttpClientModule),
     { provide: 'API_BASE_URL', useValue: environment.apiUrl }
   ]

@@ -3,49 +3,51 @@ import { AuthService } from '../../core/services/auth.service'; // Asegúrate de
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [FormsModule, HttpClientModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'] // Asegúrate de que 'styleUrls' esté en plural y corrija la ruta si es necesario
 })
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  errorMessage: string = '';
+  isLoading = false; // Variable para rastrear el estado de carga
+  showPassword: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   login() {
-    console.log("Intentando iniciar sesión");
+    this.isLoading = true; // Iniciar el indicador de carga
     const loginData = {
       email: this.email,
       password: this.password
     };
-
-    console.log(loginData);
     this.authService.login(loginData).subscribe({
       next: (response: any) => {
-        console.log('Inicio de sesión exitoso', response);
         // Guardar el token en el almacenamiento local si es necesario
-        // localStorage.setItem('authToken', response.authToken);
+        localStorage.setItem('authToken', response.authToken);
+        // Almacenar el nombre del usuario en localStorage
+        localStorage.setItem('userName', response.user.name);
+
+        this.isLoading = false; // Detener el indicador de carga
 
         // Redirigir al dashboard
         this.router.navigate(['/dashboard']); // Usa el método 'navigate' para redirigir
       },
-      error: (error: any) => {
-        console.error('Error en el inicio de sesión', error);
+      error: (error) => {
+        this.errorMessage = 'Credenciales incorrectas. Por favor, intentalo de nuevo.';
+        this.isLoading = false; // Detener el indicador de carga
       }
     });
   }
 
-  logout() {
-    // Eliminar el token del almacenamiento local
-    localStorage.removeItem('authToken');
 
-    // Redirigir al login o a la página de inicio
-    this.router.navigate(['/login']);
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
-
 }

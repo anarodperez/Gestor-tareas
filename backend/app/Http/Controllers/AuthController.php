@@ -38,9 +38,35 @@ class AuthController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        $user = $request->user();
+        $user = Auth::user(); // Obtiene el usuario autenticado
         $token = $user->createToken('PersonalAccessToken')->accessToken;
 
-        return response()->json(['token' => $token]);
+        // Incluye datos del usuario en la respuesta, ajusta según los datos que necesites enviar
+        return response()->json([
+            'token' => $token,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                // Puedes incluir más campos según sea necesario
+            ]
+        ]);
     }
+
+    public function logout(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $user->token()->revoke();
+            // Cualquier otra limpieza necesaria aquí
+            return response()->json(['message' => 'Successfully logged out']);
+        }
+
+        // Maneja el caso donde no hay un usuario autenticado
+        return response()->json(['error' => 'No authenticated user'], 401);
+    }
+
+
+
 }

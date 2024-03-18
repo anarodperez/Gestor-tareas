@@ -1,10 +1,11 @@
 <nav class="navbar navbar-expand-lg bg-primary text-white">
   <div class="container">
     <!-- Logo o nombre de la compañía -->
-    <a class="navbar-brand text-white" href="#">Compañía La Jefaza</a>
+    <a class="navbar-brand text-white" routerLink="/">Compañía La Jefaza</a>
 
     <!-- Botón para versión móvil -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -12,26 +13,28 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Inicio</a>
+          <a class="nav-link text-white" routerLink="/home">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Servicios</a>
+          <a class="nav-link text-white" href="#">Servicios</a> <!-- Mantén href="#" si la ruta no está definida aún -->
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Contacto</a>
+          <a class="nav-link text-white" href="#">Contacto</a> <!-- Mantén href="#" si la ruta no está definida aún -->
+        </li>
+        <!-- Botón de iniciar sesión para usuarios no autenticados -->
+        <li class="nav-item" *ngIf="!isAuthenticated()">
+          <a class="btn btn-outline-light ms-lg-2" routerLink="/auth/login">Iniciar sesión</a>
         </li>
 
-        <!-- Condición para mostrar el botón de iniciar sesión o el nombre del usuario -->
-        <li class="nav-item" *ngIf="!isAuthenticated">
-          <a class="btn btn-outline-light ms-lg-2" href="/login">Iniciar sesión</a>
-        </li>
-
-        <li class="nav-item dropdown" *ngIf="isAuthenticated">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          hola
+        <!-- Nombre del usuario y opción de salir para usuarios autenticados -->
+        <li class="nav-item dropdown" *ngIf="isAuthenticated()">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+           {{ getUserName() }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/logout">Salir</a></li>
+            <li><a class="dropdown-item" routerLink="/dashboard">Mi panel</a></li>
+            <li><a class="dropdown-item" href="#" (click)="onLogout($event)">Cerrar sesión</a></li>
           </ul>
         </li>
       </ul>

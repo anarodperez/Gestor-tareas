@@ -1,26 +1,31 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../core/services/auth.service';// Asegúrate de importar AuthService correctamente
+import { RouterModule } from '@angular/router'; // Importa RouterModule
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule], // Necesario para *ngIf
+  imports: [
+    CommonModule, // Necesario para directivas comunes como *ngIf, *ngFor, etc.
+    RouterModule, // Importa RouterModule aquí para usar routerLink en la plantilla
+  ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  // isAuthenticated ya no es necesario como propiedad ya que lo obtendremos directamente del servicio
-
   constructor(private authService: AuthService) {}
 
-  // Usamos un getter para obtener el estado de autenticación directamente del servicio
-  get isAuthenticated() {
+  isAuthenticated() {
     return this.authService.isAuthenticated();
   }
 
-  logout() {
+  getUserName(): string | null {
+    return this.authService.getUserName();
+  }
+
+  onLogout(event: Event) {
+    event.preventDefault();
     this.authService.logout();
-    // Aquí puedes añadir cualquier lógica adicional después del cierre de sesión, como redireccionar al usuario
   }
 }

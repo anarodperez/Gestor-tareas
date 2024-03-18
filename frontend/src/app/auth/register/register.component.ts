@@ -39,7 +39,7 @@ export class RegisterComponent {
         next: () => {
           this.successMessage = 'Registro completado con éxito. Por favor, inicia sesión.';
           // Navegar al login tras el registro exitoso
-          this.router.navigate(['/login']);
+          this.router.navigate(['/auth/login']);
         },
         error: (error: any) => {
           // Manejar errores aquí
